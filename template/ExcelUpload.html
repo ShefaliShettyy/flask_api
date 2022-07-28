@@ -1,0 +1,60 @@
+<html>
+    <head>
+        <title>Upload Excel</title>
+        <link rel="stylesheet" href="{{url_for('static',filename='css/bootstrap.min.css')}}">
+        <link rel="stylesheet" href="{{url_for('static',filename='myfont/css/all.min.css')}}">
+		<script src="{{url_for('static',filename='js/jquery.min.js')}}"></script>
+    </head>
+    <body>
+        <div class="col-md-offset-3 col-md-5" style="margin-top:50px">
+            <form action="/" method="POST" enctype="multipart/form-data">
+                <h3 class="page-header text-primary">Upload Excel File</h3>
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category,message in messages %}
+                            <div class="alert alert-{{category}}">{{message}}</div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                 <div class="form-group">
+                    <label>Browse CSV File</label>
+                    <input type="file" class="form-control" name="uploadExcel">
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Upload Excel File" class="btn btn-primary btn-block">
+                </div>
+            </form>
+        </div>
+        {% if data %}
+            <div class="row">
+            <div class="col-md-offset-3 col-md-5">
+                <h3 class="page-header text-primary "><span class="fa fa-image">  View Excel File</span></h3>
+                 <table class="table table-bordered">
+                      <thead>
+                            <tr>
+                            <th>S.No</th>
+                            <th>Excel</th>
+                            <th>Delete</th>
+                        </tr>
+                        </thead>
+                     {% for res in data %}
+                     {% set i=loop.index %}
+                        <tbody>
+                            <tr>
+                                <td style="text-align:center">{{i}}</td>
+                                <td><a href="{{url_for('view_excel',id=res['pid'])}}" class="btn btn-primary btn-block">{{res['exceldata']}}</a></td>
+                                <td><a href="{{url_for('delete_record',id=res['pid'])}}" class="btn btn-danger btn-block">Delete</a></td>
+                            </tr>
+                        </tbody>
+                {% endfor %}
+                      </table>
+            </div>
+        </div>
+        {% endif %}
+    </body>
+</html>
+<script>
+    $(document).ready(function(){
+        $(".alert").hide(4000);
+    });
+</script>
