@@ -1,0 +1,7 @@
+http://127.0.0.1:5000/:
+This above code will lead you to the Upload Excel File page..Where you can upload a csv file and the data is shown in excel formt 
+
+http://127.0.0.1:5000/sql
+Th above code will direct you ta a Predict Salary Analysis page where you need to enter the experience, test score, interview score in the range of 1 to 10 and it predicts your salary
+
+IDE : Pycahrm 
